@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Go-Gin
+
+  Sample SAM Template for Go-Gin
+
+  '
+Globals:
+  Function:
+    Timeout: 10
+Resources:
+  GinFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 256
+      Environment:
+        Variables:
+          AWS_LWA_INVOKE_MODE: RESPONSE_STREAM
+      Events:
+        APIEvent:
+          Type: HttpApi
+      ImageUri: ginfunction:v1
+    Metadata:
+      DockerContext: /Users/alpha/Documents/project/sam/app
+      DockerTag: v1
+      Dockerfile: Dockerfile
+      SamResourceId: GinFunction
+Outputs:
+  GinApi:
+    Description: API Gateway endpoint URL for Prod stage for Gin function
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/

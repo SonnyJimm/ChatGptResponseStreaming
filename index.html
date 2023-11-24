@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const f = async () => {
+        try {
+          const response = await fetch(
+            "https://qiijxl4dxy2girmwjam3543xgi0qwogd.lambda-url.us-east-1.on.aws/",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: null,
+            }
+          );
+          console.log("fired");
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          // Process the chunks from the stream
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+              break;
+            }
+            const text = decoder.decode(value);
+            let date = new Date();
+            console.log(date.getSeconds());
+            console.log(text);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      f();
+    </script>
+  </body>
+</html>
