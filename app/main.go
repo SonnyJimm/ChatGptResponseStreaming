@@ -13,13 +13,16 @@ type Event struct {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+
 	w.Header().Set("Content-Type", "application/octet-stream")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")
+
 	// Set up a timer to send events every second
 	ticker := time.NewTicker(1 * time.Second)
 	exit := time.After(10 * time.Second)
 	// Send events until the context is canceled
+
 	for {
 		select {
 		case <-ticker.C:
@@ -33,9 +36,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			if f, ok := w.(http.Flusher); ok {
 				f.Flush()
 			}
+
 		case <-exit:
 			ticker.Stop()
 			return
+
 		case <-r.Context().Done():
 			ticker.Stop()
 			return
@@ -44,6 +49,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// handle every request to sending /
 	http.HandleFunc("/", handler)
 
 	err := http.ListenAndServe(":8000", nil)
