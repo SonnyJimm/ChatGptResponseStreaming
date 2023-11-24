@@ -44,3 +44,10 @@ also on top of this set on your `template.yaml` under the resource properties
 ```
 
 these are the things you need to set the basic needs for it to run but i highly encourage you to play around more with the fields to get more about it also take a look at the original github repo they have some really good examples.
+
+```
+ // to deploy
+    sam build
+    sam deploy -g
+
+```
