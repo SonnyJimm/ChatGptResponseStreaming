@@ -1,2 +1,4 @@
 samconfig.toml
 .aws-sam/
+.gitignore
+.env
