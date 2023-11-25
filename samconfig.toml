@@ -1,0 +1,9 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "gpt-stream"
+resolve_s3 = true
+s3_prefix = "gpt-stream"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["GinFunction=130250231763.dkr.ecr.us-east-1.amazonaws.com/gptstreama72d132b/ginfunctionbfce9735repo"]
